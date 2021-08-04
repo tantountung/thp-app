@@ -1,26 +1,20 @@
 import React, { Component } from "react";
 
+
 class RoomCreate extends Component {
   createRoom = (event) => {
     event.preventDefault();
 
     const room = {
-      RoomNumber: Number(event.target["roomNumber"].value),
-      RoomType: event.target["roomType"].value,     
+      id: 0,      
+      roomNumber: Number(event.target["roomNumber"].value),      
+      roomType: event.target["roomType"].value,
     };
 
     this.props.addRoom(room);
   };
 
   render() {
-    const optionRoomType = this.props.roomTypeArray.map((roomType) => {
-      return ( 
-        <option key={roomType.id} value={roomType.id}>
-          {roomType.roomType}
-          </option>     
-      );
-    });
-     
     return (
       <div className="col-md-6">
         <div className="row">
@@ -28,28 +22,31 @@ class RoomCreate extends Component {
         </div>
 
         <form onSubmit={this.createRoom}>
+          
           <div className="row mb-2">
             <label htmlFor="roomNumber" className="col-2 mt-2">
-              Room Number:
+            Room Number:
             </label>
             <input
               id="roomNumber"
               type="number"
-              required
-              minLength="2"
+              required              
               className="form-control col-10"
               placeholder="Enter Room Number"
             />
           </div>
           <div className="row mb-2">
             <label htmlFor="roomType" className="col-2 mt-2">
-              Room Type:
+            Room Type:
             </label>
-            <select id="roomType" required className="form-control col-10">
-              {optionRoomType}
-            </select>   
-          </div>        
-                   
+            <input
+              id="roomType" 
+              type="text"             
+              className="form-control col-10"
+              placeholder="Enter Room Type"
+            />
+          </div>
+          
           <div className="row d-flex justify-content-center">
             <input
               type="reset"
@@ -68,7 +65,7 @@ class RoomCreate extends Component {
         </div>
       </div>
     );
-    }
   }
+}
 
 export default RoomCreate;

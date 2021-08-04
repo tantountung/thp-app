@@ -4,8 +4,8 @@ const RoomTable = (props) => {
   const rows = props.rooms.map((room) => {
     return (
       <tr key={room.id}>
-        <td >{room.roomNumber}</td>
-        <td >{room.roomType.roomType}</td>        
+        <td>{room.roomNumber}</td>
+        <td>{room.roomType}</td>      
         <td
           className="btn btn-info"
           onClick={() => {
@@ -23,8 +23,8 @@ const RoomTable = (props) => {
         <thead className="thead-dark">
           <tr>
             <th>Room Number</th>
-            <th>Room Type</th>                      
-            <th>Actions</th>
+            <th>Room Type</th>           
+            <th></th>
           </tr>
         </thead>
         <tbody>{rows}</tbody>
