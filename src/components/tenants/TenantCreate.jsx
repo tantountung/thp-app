@@ -29,7 +29,7 @@ class TenantCreate extends Component {
             Tenant Name:
             </label>
             <input
-              id="tenantType" 
+              id="tenantName" 
               type="text"             
               className="form-control col-10"
               placeholder="Enter Tenant Name"
