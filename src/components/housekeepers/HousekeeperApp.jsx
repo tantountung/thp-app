@@ -6,7 +6,7 @@ import HousekeeperTable from "./HousekeeperTable";
 import HousekeeperDetails from "./HousekeeperDetails";
 import HousekeeperCreate from "./HousekeeperCreate";
 
-import "../css/App.css";
+import "../../css/App.css";
 
 class App extends Component {
   state = {

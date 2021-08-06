@@ -2,11 +2,11 @@
 import React, { Component } from "react";
 import Header from "../Header";
 import Footer from "../Footer";
-import RoomTable from "./RoomTable";
+import RoomTable from "../rooms/RoomTable";
 import RoomDetails from "./RoomDetails";
 import RoomCreate from "./RoomCreate";
 
-import "../css/App.css";
+import "../../css/App.css";
 
 class App extends Component {
   state = {

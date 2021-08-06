@@ -6,13 +6,31 @@ import TenantTable from "./TenantTable";
 import TenantDetails from "./TenantDetails";
 import TenantCreate from "./TenantCreate";
 
-import "../css/App.css";
-
+import "../../css/App.css";
 class App extends Component {
   state = {
     detailsTenant: null,
     createTenant: false,
-    tenantList: [],
+    tenantList: [
+      {
+        id: 1,
+       tenantName: "Batman",
+       tenantPhone: 123,
+       tenantDocument: "Yes",
+      },
+      {
+        id: 2,
+       tenantName: "Robin",
+       tenantPhone: 321,
+       tenantDocument: "No",
+      },
+      {
+        id: 3,
+        tenantName: "Superman",
+        tenantPhone: 4565,
+        tenantDocument: "No",
+      },
+    ],
   };
 
   findTenant = (id) => {

@@ -6,7 +6,7 @@ import ContractTable from "./ContractTable";
 import ContractDetails from "./ContractDetails";
 import ContractCreate from "./ContractCreate";
 
-import "../css/App.css";
+import "../../css/App.css";
 
 class App extends Component {
   state = {
