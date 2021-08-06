@@ -1,29 +1,24 @@
-import React from "react";
+import React, { Component } from "react";
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import App from "../components/home/App";
+// import App from "../components/home/App";
 import RoomApp from "../components/rooms/RoomApp";
 import TenantApp from "../components/tenants/TenantApp";
 import HousekeeperApp from "../components/housekeepers/HousekeeperApp";
 import ContractApp from "../components/contracts/ContractApp"; 
 
 
-const Header = () => {
-  
+class Header  extends Component  {
+  render() {
     return (
         <Router>
           <div>
             <nav>
               <ul>
-                <li>
+                {/* <li>
                   <Link to="/">Home</Link>
-                </li>
+                </li> */}
                 <li>
                   <Link to="/rooms">Rooms</Link>
                 </li>
@@ -40,9 +35,9 @@ const Header = () => {
             </nav>
     
             <Switch>
-            <Route path="/">
+            {/* <Route path="/">
                 <App />
-              </Route>
+              </Route> */}
               <Route path="/rooms">
                 <RoomApp />
               </Route>
@@ -61,6 +56,6 @@ const Header = () => {
       );
     };
   
-  
+}
 
 export default Header;
