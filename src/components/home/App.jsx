@@ -1,17 +1,17 @@
 
-import React from "react";
+import React, { Component } from "react";
 import Header from "../Header";
 import Footer from "../Footer";
 import "../../css/App.css";
 
-function App () {
-  
-    return (
+class App  extends Component  {
+    render() {
+      return (
 <div className="App">
   
 <Header />
 
-        <h1>"WELCOME TO HOLLYWOOD ON ICE"</h1>
+        <h1>WELCOME TO HOLLYWOOD ON ICE</h1>
         
         <Footer />
 
@@ -21,6 +21,6 @@ function App () {
     );
     };
   
-
+};
 
 export default App;
