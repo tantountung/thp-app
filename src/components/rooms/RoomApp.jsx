@@ -8,7 +8,7 @@ import RoomCreate from "./RoomCreate";
 
 import "../../css/App.css";
 
-class App extends Component {
+class RoomApp extends Component {
   state = {
     detailsRoom: null,
     createRoom: false,
@@ -148,4 +148,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default RoomApp;

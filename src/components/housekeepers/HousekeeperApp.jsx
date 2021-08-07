@@ -8,7 +8,7 @@ import HousekeeperCreate from "./HousekeeperCreate";
 
 import "../../css/App.css";
 
-class App extends Component {
+class HousekeeperApp extends Component {
   state = {
     detailsHousekeeper: null,
     createHousekeeper: false,
@@ -122,4 +122,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default HousekeeperApp;

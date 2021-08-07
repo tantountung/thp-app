@@ -7,7 +7,7 @@ import TenantDetails from "./TenantDetails";
 import TenantCreate from "./TenantCreate";
 
 import "../../css/App.css";
-class App extends Component {
+class TenantApp extends Component {
   state = {
     detailsTenant: null,
     createTenant: false,
@@ -140,4 +140,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default TenantApp;

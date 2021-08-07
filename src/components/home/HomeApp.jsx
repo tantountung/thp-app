@@ -4,10 +4,10 @@ import Header from "../Header";
 import Footer from "../Footer";
 import "../../css/App.css";
 
-class App  extends Component  {
+class HomeApp  extends Component  {
     render() {
       return (
-<div className="App">
+<div >
   
 <Header />
 
@@ -23,4 +23,4 @@ class App  extends Component  {
   
 };
 
-export default App;
+export default HomeApp;

@@ -8,7 +8,7 @@ import ContractCreate from "./ContractCreate";
 
 import "../../css/App.css";
 
-class App extends Component {
+class ContractApp extends Component {
   state = {
     detailsContract: null,
     createContract: false,
@@ -122,4 +122,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default ContractApp;
