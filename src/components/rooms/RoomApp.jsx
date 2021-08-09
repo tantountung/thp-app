@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import RoomTable from "../rooms/RoomTable";
 import RoomDetails from "./RoomDetails";
 import RoomCreate from "./RoomCreate";
+import { getRooms } from "../api/roomsApi";
 
 import "../../css/App.css";
 
@@ -10,34 +11,15 @@ class RoomApp extends Component {
   state = {
     detailsRoom: null,
     createRoom: false,
-    roomList: [
-      {
-        id: 1,
-        roomNumber: 101,
-        roomType: "Suite",
-      },
-      {
-        id: 2,
-        roomNumber: 102,
-        roomType: "Deluxe",
-      },
-      {
-        id: 3,
-        roomNumber: 103,
-        roomType: "Standard",
-      },
-      {
-        id: 4,
-        roomNumber: 104,
-        roomType: "Suite",
-      },
-      {
-        id: 5,
-        roomNumber: 105,
-        roomType: "Standard",
-      },
-    ],
+    roomList: [],
   };
+
+  componentDidMount() {
+    const _this = this;
+    getRooms().then((rooms) => {
+      _this.setState({ roomList: rooms });
+    });
+  }
 
   findRoom = (id) => {
     const rooms = this.state.roomList;
@@ -85,7 +67,12 @@ class RoomApp extends Component {
 
   addRoom = (room) => {
     const roomList = this.state.roomList;
-    const newId =
+    
+    if(roomList === null || roomList.length < 1) {
+      room.id = 1;
+    }
+    else {
+      const newId =
       roomList.reduce((rowRoom, highest) => {
         if (rowRoom.id > highest.id) {
           return rowRoom.id;
@@ -93,8 +80,9 @@ class RoomApp extends Component {
         return highest;
       }).id + 1; 
     room.id = newId;
-
-    roomList.push(room);
+    }
+    
+        roomList.push(room);
 
     this.setState({
       roomList: roomList,
