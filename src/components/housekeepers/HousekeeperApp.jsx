@@ -1,7 +1,5 @@
 
 import React, { Component } from "react";
-import Header from "../Header";
-import Footer from "../Footer";
 import HousekeeperTable from "./HousekeeperTable";
 import HousekeeperDetails from "./HousekeeperDetails";
 import HousekeeperCreate from "./HousekeeperCreate";
@@ -105,7 +103,7 @@ class HousekeeperApp extends Component {
 
     return (
       <div>
-        <Header />
+        {/* <Header /> */}
 
         <div className="container stay-clear">
           <h3>Housekeeper SPA</h3>
@@ -116,7 +114,7 @@ class HousekeeperApp extends Component {
           </div>
         </div>
 
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }

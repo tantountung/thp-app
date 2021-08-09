@@ -1,7 +1,5 @@
 
 import React, { Component } from "react";
-import Header from "../Header";
-import Footer from "../Footer";
 import TenantTable from "./TenantTable";
 import TenantDetails from "./TenantDetails";
 import TenantCreate from "./TenantCreate";
@@ -123,7 +121,7 @@ class TenantApp extends Component {
 
     return (
       <div>
-        <Header />
+        {/* <Header /> */}
 
         <div className="container stay-clear">
           <h3>Tenant SPA</h3>
@@ -134,7 +132,7 @@ class TenantApp extends Component {
           </div>
         </div>
 
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }
