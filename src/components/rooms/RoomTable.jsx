@@ -6,13 +6,15 @@ const RoomTable = (props) => {
       <tr key={room.id}>
         <td>{room.roomNumber}</td>
         <td>{room.roomType}</td>      
-        <td
-          className="btn btn-info"
+        <td>
+          <button 
           onClick={() => {
             props.showRoom(room.id);
-          }}>
+            }}
+              className="btn btn-info">
           Details
-        </td>
+          </button>        
+                  </td>
       </tr>
     );
   });

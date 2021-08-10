@@ -1,9 +1,9 @@
 
 import React, { Component } from "react";
-import RoomTable from "../rooms/RoomTable";
+import RoomTable from "./RoomTable";
 import RoomDetails from "./RoomDetails";
 import RoomCreate from "./RoomCreate";
-import { getRooms } from "../api/roomsApi";
+import getRooms, { getRoomById,  createRoom, deleteRoom } from "../api/roomsApi";
 
 import "../../css/App.css";
 
@@ -21,19 +21,12 @@ class RoomApp extends Component {
     });
   }
 
-  findRoom = (id) => {
-    const rooms = this.state.roomList;
-    let foundRoom = null;
-    rooms.forEach((element) => {
-      if (element.id === id) {
-        foundRoom = element;
-      }
-    });
-    return foundRoom;
+  findRoom = async (id) => {
+       return await getRoomById(id);
   };
 
-  showRoom = (id) => {
-    const room = this.findRoom(id);
+  showRoom = async (id) => {
+    const room = await this.findRoom(id);
     if (room != null) {
       this.setState({
         detailsRoom: room,
@@ -47,42 +40,41 @@ class RoomApp extends Component {
     });
   };
 
-  deleteRoom = (id) => {
+  deleteRoomHandler = (id) => {
     const room = this.findRoom(id);
     if (room != null) {
-      const rooms = this.state.roomList;
-      rooms.splice(rooms.indexOf(room), 1);
-      this.setState({
-        roomList: rooms,
-        detailsRoom: null,
-      });
+      if (deleteRoom(id)) {
+        const rooms = this.state.roomList;
+        rooms.forEach((element) => {
+          if (element.id === id) {
+            rooms.pop(element);
+          }
+        });
+
+        this.setState({
+          roomList: rooms,
+          detailsRoom: null,
+        });
+      }
     }
   };
 
-  createRoom = () => {
+  showCreateRoom = () => {
     this.setState({
       createRoom: true,
     });
   };
 
-  addRoom = (room) => {
+  addRoom = async (room) => {
     const roomList = this.state.roomList;
     
-    if(roomList === null || roomList.length < 1) {
-      room.id = 1;
+    room = await createRoom(room);
+
+    console.log(room);
+
+    if (room !== undefined) {
+      roomList.push(room);
     }
-    else {
-      const newId =
-      roomList.reduce((rowRoom, highest) => {
-        if (rowRoom.id > highest.id) {
-          return rowRoom.id;
-        }
-        return highest;
-      }).id + 1; 
-    room.id = newId;
-    }
-    
-        roomList.push(room);
 
     this.setState({
       roomList: roomList,
@@ -102,13 +94,13 @@ class RoomApp extends Component {
         <RoomDetails
           room={this.state.detailsRoom}
           closeDetails={this.closeDetails}
-          deleteRoom={this.deleteRoom}
+          deleteRoom={this.deleteRoomHandler}
         />
       ) : this.state.createRoom ? (
         <RoomCreate addRoom={this.addRoom} closeCreate={this.closeCreate} />
       ) : (
-        <div>
-          <button onClick={this.createRoom} className="btn btn-success">
+        <div className="col-md-6">
+          <button onClick={this.showCreateRoom} className="btn btn-success">
             Add Room
           </button>
           <p>Click on Details button to see more information here.</p>
@@ -116,9 +108,8 @@ class RoomApp extends Component {
       );
 
     return (
-      <div>
-        {/* <Header /> */}
-
+      <React.Fragment>
+        
         <div className="container stay-clear">
           <h3>Room SPA</h3>
           <hr />
@@ -128,8 +119,7 @@ class RoomApp extends Component {
           </div>
         </div>
 
-        {/* <Footer /> */}
-      </div>
+             </React.Fragment>
     );
   }
 }
