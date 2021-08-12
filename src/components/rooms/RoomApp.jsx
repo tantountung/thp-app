@@ -70,8 +70,6 @@ class RoomApp extends Component {
     
     room = await createRoom(room);
 
-    console.log(room);
-
     if (room !== undefined) {
       roomList.push(room);
     }

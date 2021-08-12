@@ -26,7 +26,7 @@ const RoomTable = (props) => {
           <tr>
             <th>Room Number</th>
             <th>Room Type</th>           
-            <th></th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>{rows}</tbody>
