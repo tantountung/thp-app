@@ -3,47 +3,30 @@ import React, { Component } from "react";
 import TenantTable from "./TenantTable";
 import TenantDetails from "./TenantDetails";
 import TenantCreate from "./TenantCreate";
+import getTenants, { getTenantById,  createTenant, deleteTenant } from "../api/tenantsApi";
 
 import "../../css/App.css";
+
 class TenantApp extends Component {
   state = {
     detailsTenant: null,
     createTenant: false,
-    tenantList: [
-      {
-        id: 1,
-       tenantName: "Batman",
-       tenantPhone: 123,
-       tenantDocument: "Yes",
-      },
-      {
-        id: 2,
-       tenantName: "Robin",
-       tenantPhone: 321,
-       tenantDocument: "No",
-      },
-      {
-        id: 3,
-        tenantName: "Superman",
-        tenantPhone: 4565,
-        tenantDocument: "No",
-      },
-    ],
+    tenantList: [],
   };
 
-  findTenant = (id) => {
-    const tenants = this.state.tenantList;
-    let foundTenant = null;
-    tenants.forEach((element) => {
-      if (element.id === id) {
-        foundTenant = element;
-      }
+  componentDidMount() {
+    const _this = this;
+    getTenants().then((tenants) => {
+      _this.setState({ tenantList: tenants });
     });
-    return foundTenant;
+  }
+
+  findTenant = async (id) => {
+       return await getTenantById(id);
   };
 
-  showTenant = (id) => {
-    const tenant = this.findTenant(id);
+  showTenant = async (id) => {
+    const tenant = await this.findTenant(id);
     if (tenant != null) {
       this.setState({
         detailsTenant: tenant,
@@ -57,36 +40,39 @@ class TenantApp extends Component {
     });
   };
 
-  deleteTenant = (id) => {
+  deleteTenantHandler = (id) => {
     const tenant = this.findTenant(id);
     if (tenant != null) {
-      const tenants = this.state.tenantList;
-      tenants.splice(tenants.indexOf(tenant), 1);
-      this.setState({
-        tenantList: tenants,
-        detailsTenant: null,
-      });
+      if (deleteTenant(id)) {
+        const tenants = this.state.tenantList;
+        tenants.forEach((element) => {
+          if (element.id === id) {
+            tenants.pop(element);
+          }
+        });
+
+        this.setState({
+          tenantList: tenants,
+          detailsTenant: null,
+        });
+      }
     }
   };
 
-  createTenant = () => {
+  showCreateTenant = () => {
     this.setState({
       createTenant: true,
     });
   };
 
-  addTenant = (tenant) => {
+  addTenant = async (tenant) => {
     const tenantList = this.state.tenantList;
-    const newId =
-      tenantList.reduce((rowTenant, highest) => {
-        if (rowTenant.id > highest.id) {
-          return rowTenant.id;
-        }
-        return highest;
-      }).id + 1; 
-    tenant.id = newId;
+    
+    tenant = await createTenant(tenant);
 
-    tenantList.push(tenant);
+    if (tenant !== undefined) {
+      tenantList.push(tenant);
+    }
 
     this.setState({
       tenantList: tenantList,
@@ -106,13 +92,13 @@ class TenantApp extends Component {
         <TenantDetails
           tenant={this.state.detailsTenant}
           closeDetails={this.closeDetails}
-          deleteTenant={this.deleteTenant}
+          deleteTenant={this.deleteTenantHandler}
         />
       ) : this.state.createTenant ? (
         <TenantCreate addTenant={this.addTenant} closeCreate={this.closeCreate} />
       ) : (
-        <div>
-          <button onClick={this.createTenant} className="btn btn-success">
+        <div className="col-md-6">
+          <button onClick={this.showCreateTenant} className="btn btn-success">
             Add Tenant
           </button>
           <p>Click on Details button to see more information here.</p>
@@ -120,9 +106,8 @@ class TenantApp extends Component {
       );
 
     return (
-      <div>
-        {/* <Header /> */}
-
+      <React.Fragment>
+        
         <div className="container stay-clear">
           <h3>Tenant SPA</h3>
           <hr />
@@ -132,8 +117,7 @@ class TenantApp extends Component {
           </div>
         </div>
 
-        {/* <Footer /> */}
-      </div>
+             </React.Fragment>
     );
   }
 }

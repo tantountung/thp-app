@@ -1,13 +1,13 @@
 import axios from 'axios';
 
 export default function getTenants() {
-    return axios.get('https://localhost:44320/api/roomsReact')
+    return axios.get('https://localhost:44320/api/tenantsReact')
         .then(data => data.data);
 }
 
 export async function getTenantById(id) {
     try {
-        let response = await axios.get('https://localhost:44320/api/react/' + id);
+        let response = await axios.get('https://localhost:44320/api/tenantsReact/' + id);
                 let json = await response.data;
                 return json;
     }
@@ -19,7 +19,7 @@ export async function getTenantById(id) {
 export async function createTenant(tenant) {
 
     try {
-        let response = await axios.post('https://localhost:44320/api/React/', {
+        let response = await axios.post('https://localhost:44320/api/tenantsReact/', {
             tenantNumber: tenant.tenantNumber,
             tenantType: tenant.tenantType
         });
@@ -34,7 +34,7 @@ export async function createTenant(tenant) {
 export async function deleteTenant(id) {
 
     try {
-        let response = await axios.delete('https://localhost:44320/api/React/' + id);
+        let response = await axios.delete('https://localhost:44320/api/tenantsReact/' + id);
                 return true;
     }
     catch (e) {

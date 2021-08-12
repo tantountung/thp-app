@@ -26,7 +26,7 @@ const TenantTable = (props) => {
             <th>Tenant Name</th>
             <th>Tenant Phone</th> 
             <th>Tenant Document</th>           
-            <th></th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>{rows}</tbody>
