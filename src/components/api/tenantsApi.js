@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-export default function getRooms() {
+export default function getTenants() {
     return axios.get('https://localhost:44320/api/roomsReact')
         .then(data => data.data);
 }
 
-export async function getRoomById(id) {
+export async function getTenantById(id) {
     try {
-        let response = await axios.get('https://localhost:44320/api/roomsReact/' + id);
+        let response = await axios.get('https://localhost:44320/api/react/' + id);
                 let json = await response.data;
                 return json;
     }
@@ -16,12 +16,12 @@ export async function getRoomById(id) {
     }
 }
 
-export async function createRoom(room) {
+export async function createTenant(tenant) {
 
     try {
-        let response = await axios.post('https://localhost:44320/api/roomsReact/', {
-            roomNumber: room.roomNumber,
-            roomType: room.roomType
+        let response = await axios.post('https://localhost:44320/api/React/', {
+            tenantNumber: tenant.tenantNumber,
+            tenantType: tenant.tenantType
         });
                 let json = await response.data;
                 return json;
@@ -31,10 +31,10 @@ export async function createRoom(room) {
     }
 }
 
-export async function deleteRoom(id) {
+export async function deleteTenant(id) {
 
     try {
-        let response = await axios.delete('https://localhost:44320/api/roomsReact/' + id);
+        let response = await axios.delete('https://localhost:44320/api/React/' + id);
                 return true;
     }
     catch (e) {
