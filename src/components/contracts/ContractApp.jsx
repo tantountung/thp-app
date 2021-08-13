@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import ContractTable from "./ContractTable";
 import ContractDetails from "./ContractDetails";
 import ContractCreate from "./ContractCreate";
+import getContracts, { getContractById,  createContract, deleteContract } from "../api/contractsApi";
 
 import "../../css/App.css";
 
@@ -13,19 +14,19 @@ class ContractApp extends Component {
     contractList: [],
   };
 
-  findContract = (id) => {
-    const contracts = this.state.contractList;
-    let foundContract = null;
-    contracts.forEach((element) => {
-      if (element.id === id) {
-        foundContract = element;
-      }
+  componentDidMount() {
+    const _this = this;
+    getContracts().then((contracts) => {
+      _this.setState({ contractList: contracts });
     });
-    return foundContract;
+  }
+
+  findContract = async (id) => {
+       return await getContractById(id);
   };
 
-  showContract = (id) => {
-    const contract = this.findContract(id);
+  showContract = async (id) => {
+    const contract = await this.findContract(id);
     if (contract != null) {
       this.setState({
         detailsContract: contract,
@@ -39,36 +40,39 @@ class ContractApp extends Component {
     });
   };
 
-  deleteContract = (id) => {
+  deleteContractHandler = (id) => {
     const contract = this.findContract(id);
     if (contract != null) {
-      const contracts = this.state.contractList;
-      contracts.splice(contracts.indexOf(contract), 1);
-      this.setState({
-        contractList: contracts,
-        detailsContract: null,
-      });
+      if (deleteContract(id)) {
+        const contracts = this.state.contractList;
+        contracts.forEach((element) => {
+          if (element.id === id) {
+            contracts.pop(element);
+          }
+        });
+
+        this.setState({
+          contractList: contracts,
+          detailsContract: null,
+        });
+      }
     }
   };
 
-  createContract = () => {
+  showCreateContract = () => {
     this.setState({
       createContract: true,
     });
   };
 
-  addContract = (contract) => {
+  addContract = async (contract) => {
     const contractList = this.state.contractList;
-    const newId =
-      contractList.reduce((rowContract, highest) => {
-        if (rowContract.id > highest.id) {
-          return rowContract.id;
-        }
-        return highest;
-      }).id + 1; 
-    contract.id = newId;
+    
+    contract = await createContract(contract);
 
-    contractList.push(contract);
+    if (contract !== undefined) {
+      contractList.push(contract);
+    }
 
     this.setState({
       contractList: contractList,
@@ -88,13 +92,13 @@ class ContractApp extends Component {
         <ContractDetails
           contract={this.state.detailsContract}
           closeDetails={this.closeDetails}
-          deleteContract={this.deleteContract}
+          deleteContract={this.deleteContractHandler}
         />
       ) : this.state.createContract ? (
         <ContractCreate addContract={this.addContract} closeCreate={this.closeCreate} />
       ) : (
-        <div>
-          <button onClick={this.createContract} className="btn btn-success">
+        <div className="col-md-6">
+          <button onClick={this.showCreateContract} className="btn btn-success">
             Add Contract
           </button>
           <p>Click on Details button to see more information here.</p>
@@ -102,9 +106,8 @@ class ContractApp extends Component {
       );
 
     return (
-      <div>
-        {/* <Header /> */}
-
+      <React.Fragment>
+        
         <div className="container stay-clear">
           <h3>Contract SPA</h3>
           <hr />
@@ -114,8 +117,7 @@ class ContractApp extends Component {
           </div>
         </div>
 
-        {/* <Footer /> */}
-      </div>
+             </React.Fragment>
     );
   }
 }

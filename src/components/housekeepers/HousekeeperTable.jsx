@@ -5,10 +5,10 @@ const HousekeeperTable = (props) => {
     return (
       <tr key={housekeeper.id}>
         <td>{housekeeper.housekeeperName}</td>
-        <td>{housekeeper.housekeeperPhone}</td>   
+        {/* <td>{housekeeper.housekeeperPhone}</td>   
         <td>{housekeeper.housekeeperAddress}</td>  
         <td>{housekeeper.housekeeperBankNumber}</td>  
-        <td>{housekeeper.housekeeperLeave}</td>  
+        <td>{housekeeper.housekeeperLeave}</td>   */}
         <td>{housekeeper.housekeeperSalary}</td>  
         <td>{housekeeper.housekeeperStartDate}</td>      
         <td>{housekeeper.housekeeperEndDate}</td>      
@@ -29,14 +29,14 @@ const HousekeeperTable = (props) => {
         <thead className="thead-dark">
           <tr>
             <th>Housekeeper Name</th>
-            <th>Housekeeper Phone</th> 
+            {/* <th>Housekeeper Phone</th> 
             <th>Housekeeper Address</th> 
             <th>Housekeeper BankNumber</th> 
-            <th>Housekeeper Leave</th> 
+            <th>Housekeeper Leave</th>  */}
             <th>Housekeeper Salary</th> 
             <th>Housekeeper StartDate</th> 
             <th>Housekeeper EndDate</th>           
-            <th></th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>{rows}</tbody>

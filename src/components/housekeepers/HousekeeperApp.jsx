@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import HousekeeperTable from "./HousekeeperTable";
 import HousekeeperDetails from "./HousekeeperDetails";
 import HousekeeperCreate from "./HousekeeperCreate";
+import getHousekeepers, { getHousekeeperById,  createHousekeeper, deleteHousekeeper } from "../api/housekeepersApi";
 
 import "../../css/App.css";
 
@@ -13,19 +14,19 @@ class HousekeeperApp extends Component {
     housekeeperList: [],
   };
 
-  findHousekeeper = (id) => {
-    const housekeepers = this.state.housekeeperList;
-    let foundHousekeeper = null;
-    housekeepers.forEach((element) => {
-      if (element.id === id) {
-        foundHousekeeper = element;
-      }
+  componentDidMount() {
+    const _this = this;
+    getHousekeepers().then((housekeepers) => {
+      _this.setState({ housekeeperList: housekeepers });
     });
-    return foundHousekeeper;
+  }
+
+  findHousekeeper = async (id) => {
+       return await getHousekeeperById(id);
   };
 
-  showHousekeeper = (id) => {
-    const housekeeper = this.findHousekeeper(id);
+  showHousekeeper = async (id) => {
+    const housekeeper = await this.findHousekeeper(id);
     if (housekeeper != null) {
       this.setState({
         detailsHousekeeper: housekeeper,
@@ -39,36 +40,39 @@ class HousekeeperApp extends Component {
     });
   };
 
-  deleteHousekeeper = (id) => {
+  deleteHousekeeperHandler = (id) => {
     const housekeeper = this.findHousekeeper(id);
     if (housekeeper != null) {
-      const housekeepers = this.state.housekeeperList;
-      housekeepers.splice(housekeepers.indexOf(housekeeper), 1);
-      this.setState({
-        housekeeperList: housekeepers,
-        detailsHousekeeper: null,
-      });
+      if (deleteHousekeeper(id)) {
+        const housekeepers = this.state.housekeeperList;
+        housekeepers.forEach((element) => {
+          if (element.id === id) {
+            housekeepers.pop(element);
+          }
+        });
+
+        this.setState({
+          housekeeperList: housekeepers,
+          detailsHousekeeper: null,
+        });
+      }
     }
   };
 
-  createHousekeeper = () => {
+  showCreateHousekeeper = () => {
     this.setState({
       createHousekeeper: true,
     });
   };
 
-  addHousekeeper = (housekeeper) => {
+  addHousekeeper = async (housekeeper) => {
     const housekeeperList = this.state.housekeeperList;
-    const newId =
-      housekeeperList.reduce((rowHousekeeper, highest) => {
-        if (rowHousekeeper.id > highest.id) {
-          return rowHousekeeper.id;
-        }
-        return highest;
-      }).id + 1; 
-    housekeeper.id = newId;
+    
+    housekeeper = await createHousekeeper(housekeeper);
 
-    housekeeperList.push(housekeeper);
+    if (housekeeper !== undefined) {
+      housekeeperList.push(housekeeper);
+    }
 
     this.setState({
       housekeeperList: housekeeperList,
@@ -88,13 +92,13 @@ class HousekeeperApp extends Component {
         <HousekeeperDetails
           housekeeper={this.state.detailsHousekeeper}
           closeDetails={this.closeDetails}
-          deleteHousekeeper={this.deleteHousekeeper}
+          deleteHousekeeper={this.deleteHousekeeperHandler}
         />
       ) : this.state.createHousekeeper ? (
         <HousekeeperCreate addHousekeeper={this.addHousekeeper} closeCreate={this.closeCreate} />
       ) : (
-        <div>
-          <button onClick={this.createHousekeeper} className="btn btn-success">
+        <div className="col-md-6">
+          <button onClick={this.showCreateHousekeeper} className="btn btn-success">
             Add Housekeeper
           </button>
           <p>Click on Details button to see more information here.</p>
@@ -102,9 +106,8 @@ class HousekeeperApp extends Component {
       );
 
     return (
-      <div>
-        {/* <Header /> */}
-
+      <React.Fragment>
+        
         <div className="container stay-clear">
           <h3>Housekeeper SPA</h3>
           <hr />
@@ -114,8 +117,7 @@ class HousekeeperApp extends Component {
           </div>
         </div>
 
-        {/* <Footer /> */}
-      </div>
+             </React.Fragment>
     );
   }
 }
