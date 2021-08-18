@@ -20,8 +20,9 @@ export async function createTenant(tenant) {
 
     try {
         let response = await axios.post('https://localhost:44320/api/tenantsReact/', {
-            tenantNumber: tenant.tenantNumber,
-            tenantType: tenant.tenantType
+            tenantName: tenant.tenantName,
+            tenantPhone: tenant.tenantPhone,
+            tenantDocument: tenant.tenantDocument,
         });
                 let json = await response.data;
                 return json;

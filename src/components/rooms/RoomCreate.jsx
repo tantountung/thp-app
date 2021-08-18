@@ -53,7 +53,9 @@ class RoomCreate extends Component {
               className="mr-2 btn btn-warning"
               value="Reset"
             />
-            <input type="submit" className=" btn btn-success" value="Create" />
+            <input type="submit" 
+            className=" btn btn-success" 
+            value="Create" />
           </div>
         </form>
         <div className="d-flex justify-content-end">

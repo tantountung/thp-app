@@ -8,7 +8,10 @@ class TenantCreate extends Component {
     const tenant = {
       id: 0,     
       tenantName: event.target["tenantName"].value,   
-      tenantPhone: Number(event.target["tenantPhone"].value),      
+      tenantPhone: event.target["tenantPhone"].value,      
+      //issue cant add since before phone was put as Number, 
+      // whiel MVC is in string, not int
+      //phone number is text since no mathematical method should be done
       tenantDocument: event.target["tenantDocument"].value,
     };
 
@@ -30,7 +33,8 @@ class TenantCreate extends Component {
             </label>
             <input
               id="tenantName" 
-              type="text"             
+              type="text" 
+              required            
               className="form-control col-10"
               placeholder="Enter Tenant Name"
             />
@@ -41,8 +45,8 @@ class TenantCreate extends Component {
             </label>
             <input
               id="tenantPhone"
-              type="number"
-              required              
+              type="text"
+               //phoen is text and mvc is string             
               className="form-control col-10"
               placeholder="Enter Tenant Phone"
             />
@@ -53,7 +57,8 @@ class TenantCreate extends Component {
             </label>
             <input
               id="tenantDocument" 
-              type="text"             
+              type="text"  
+              required           
               className="form-control col-10"
               placeholder="Enter Tenant Document"
             />
@@ -65,7 +70,9 @@ class TenantCreate extends Component {
               className="mr-2 btn btn-warning"
               value="Reset"
             />
-            <input type="submit" className=" btn btn-success" value="Create" />
+            <input type="submit" 
+            className=" btn btn-success" 
+            value="Create" />
           </div>
         </form>
         <div className="d-flex justify-content-end">

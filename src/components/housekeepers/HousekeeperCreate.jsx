@@ -4,17 +4,17 @@ import React, { Component } from "react";
 class HousekeeperCreate extends Component {
   createHousekeeper = (event) => {
     event.preventDefault();
-
+    
     const housekeeper = {
       id: 0,     
       housekeeperName: event.target["housekeeperName"].value,   
-      housekeeperPhone: Number(event.target["housekeeperPhone"].value),      
+      housekeeperPhone: event.target["housekeeperPhone"].value,      
       housekeeperAddress: event.target["housekeeperAddress"].value,
-      housekeeperBankNumber: Number(event.target["housekeeperBankNumber"].value),
+      housekeeperBankNumber: event.target["housekeeperBankNumber"].value,
       housekeeperLeave: Number(event.target["housekeeperLeave"].value),
       housekeeperSalary: Number(event.target["housekeeperSalary"].value),
-      housekeeperStartDate: Date(event.target["housekeeperStartDate"].value),
-      housekeeperEndDate: Date(event.target["housekeeperEndDate"].value),
+      housekeeperStartDate: event.target["housekeeperStartDate"].value,
+      housekeeperEndDate: event.target["housekeeperEndDate"].value,
     };
 
     this.props.addHousekeeper(housekeeper);
@@ -46,7 +46,7 @@ class HousekeeperCreate extends Component {
             </label>
             <input
               id="housekeeperPhone"
-              type="number"
+              type="text"
               required              
               className="form-control col-10"
               placeholder="Enter Housekeeper Phone"
@@ -69,7 +69,8 @@ class HousekeeperCreate extends Component {
             </label>
             <input
               id="housekeeperBankNumber"
-              type="number"
+              type="text" // type is text, since MVC is string and cant be trated like numbers since will be calculated
+
               required              
               className="form-control col-10"
               placeholder="Enter Housekeeper BankNumber"
@@ -93,7 +94,7 @@ class HousekeeperCreate extends Component {
             </label>
             <input
               id="housekeeperSalary"
-              type="number"
+              type="number" //type must match in the backend, this one match because int in MVC
               required              
               className="form-control col-10"
               placeholder="Enter Housekeeper Salary"
@@ -117,8 +118,9 @@ class HousekeeperCreate extends Component {
             </label>
             <input
               id="housekeeperEndDate"
-              type="date"
-              required              
+              type="datetime-local"
+              //datetime means there will be time asked,better like row 109
+                       
               className="form-control col-10"
               placeholder="Enter Housekeeper EndDate"
             />

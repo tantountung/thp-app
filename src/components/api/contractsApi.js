@@ -20,9 +20,14 @@ export async function createContract(contract) {
 
     try {
         let response = await axios.post('https://localhost:44320/api/contractsReact/', {
-            contractNumber: contract.contractNumber,
-            contractType: contract.contractType
+            roomPrice: contract.roomPrice,
+            paymentDate: contract.paymentDate,
+            startDate: contract.startDate,
+            endDate: contract.endDate,
+            roomInQuestion: contract.roomInQuestion,
+            tenantInQuestion: contract.tenantInQuestion,
         });
+      
                 let json = await response.data;
                 return json;
     }
