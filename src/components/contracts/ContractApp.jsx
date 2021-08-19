@@ -3,7 +3,8 @@ import React, { Component } from "react";
 import ContractTable from "./ContractTable";
 import ContractDetails from "./ContractDetails";
 import ContractCreate from "./ContractCreate";
-import getContracts, { getContractById,  createContract, deleteContract } from "../api/contractsApi";
+import getContracts, { getContractById,  createContract, deleteContract,
+getRooms, getTenants } from "../api/contractsApi";
 
 import "../../css/App.css";
 
@@ -12,6 +13,8 @@ class ContractApp extends Component {
     detailsContract: null,
     createContract: false,
     contractList: [],
+    roomList: [],
+    tenantList: []
   };
 
   componentDidMount() {
@@ -19,6 +22,16 @@ class ContractApp extends Component {
     getContracts().then((contracts) => {
       _this.setState({ contractList: contracts });
     });
+
+    getRooms().then((rooms) => {
+      _this.setState({ roomList: rooms });
+    });
+
+    getTenants().then((tenants) => {
+      _this.setState({ tenantList: tenants });
+    });
+
+
   }
 
   findContract = async (id) => {
@@ -95,7 +108,11 @@ class ContractApp extends Component {
           deleteContract={this.deleteContractHandler}
         />
       ) : this.state.createContract ? (
-        <ContractCreate addContract={this.addContract} closeCreate={this.closeCreate} />
+        <ContractCreate addContract={this.addContract} 
+        closeCreate={this.closeCreate}
+        roomArray= {this.state.roomList}
+        tenantArray= {this.state.tenantList}
+         />
       ) : (
         <div className="col-md-6">
           <button onClick={this.showCreateContract} className="btn btn-success">
@@ -112,7 +129,8 @@ class ContractApp extends Component {
           <h3>Contract SPA</h3>
           <hr />
           <div className="row">
-            <ContractTable contracts={this.state.contractList} showContract={this.showContract} />
+            <ContractTable contracts={this.state.contractList} 
+            showContract={this.showContract} />
             {sideElement}
           </div>
         </div>

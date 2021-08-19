@@ -8,8 +8,8 @@ const ContractTable = (props) => {
         {/* <td>{contract.paymentDate}</td>   
         <td>{contract.startDate}</td>  
         <td>{contract.endDate}</td>   */}
-        <td>{contract.roomInQuestion}</td>  
-        <td>{contract.tenantInQuestion}</td>  
+        <td>{contract.roomInQuestionId}</td>  
+        <td>{contract.tenantInQuestionId}</td>  
            
         <td
           className="btn btn-info"

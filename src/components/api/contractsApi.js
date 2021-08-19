@@ -5,6 +5,16 @@ export default function getContracts() {
         .then(data => data.data);
 }
 
+export function getRooms() {
+    return axios.get('https://localhost:44320/api/roomsReact')
+        .then(data => data.data);
+}
+export function getTenants() {
+    return axios.get('https://localhost:44320/api/tenantsReact')
+        .then(data => data.data);
+}
+
+
 export async function getContractById(id) {
     try {
         let response = await axios.get('https://localhost:44320/api/contractsReact/' + id);
@@ -24,8 +34,8 @@ export async function createContract(contract) {
             paymentDate: contract.paymentDate,
             startDate: contract.startDate,
             endDate: contract.endDate,
-            roomInQuestion: contract.roomInQuestion,
-            tenantInQuestion: contract.tenantInQuestion,
+            roomInQuestionId: contract.roomInQuestionId,
+            tenantInQuestionId  : contract.tenantInQuestionId,
         });
       
                 let json = await response.data;

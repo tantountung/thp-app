@@ -11,7 +11,7 @@ const HousekeeperTable = (props) => {
         <td>{housekeeper.housekeeperLeave}</td>   */}
         <td>{housekeeper.housekeeperSalary}</td>  
         <td>{housekeeper.housekeeperStartDate}</td>      
-        <td>{housekeeper.housekeeperEndDate}</td>      
+        {/* <td>{housekeeper.housekeeperEndDate}</td>       */}
         <td
           className="btn btn-info"
           onClick={() => {
@@ -35,7 +35,7 @@ const HousekeeperTable = (props) => {
             <th>Housekeeper Leave</th>  */}
             <th>Housekeeper Salary</th> 
             <th>Housekeeper StartDate</th> 
-            <th>Housekeeper EndDate</th>           
+            {/* <th>Housekeeper EndDate</th>            */}
             <th>Actions</th>
           </tr>
         </thead>

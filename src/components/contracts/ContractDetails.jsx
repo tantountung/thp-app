@@ -27,12 +27,12 @@ const ContractDetails = (props) => {
 
         <li className="list-group-item">
           <b>Room In Question:</b>
-          <p>{props.contract.roomInQuestion}</p>
+          <p>{props.contract.roomInQuestionId}</p>
         </li>
        
         <li className="list-group-item">
           <b>Tenant In Question:</b>
-          <p>{props.contract.tenantInQuestion}</p>
+          <p>{props.contract.tenantInQuestionId}</p>
         </li>
 
                 

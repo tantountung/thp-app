@@ -8,17 +8,35 @@ class ContractCreate extends Component {
     const contract = {
       id: 0,           
       roomPrice: Number(event.target["roomPrice"].value),
-      paymentDate: Number(event.target["paymentDate"].value),
-      startDate: Date(event.target["startDate"].value),
-      endDate: Date(event.target["endDate"].value),
-      roomInQuestion: Number(event.target["roomInQuestion"].value),
-      tenantInQuestion: event.target["tenantInQuestion"].value,      
+      paymentDate: event.target["paymentDate"].value,
+      startDate: event.target["startDate"].value,
+      endDate: event.target["endDate"].value,
+      roomInQuestionId: event.target["roomInQuestion"].value,
+      tenantInQuestionId: event.target["tenantInQuestion"].value,      
     };
 
     this.props.addContract(contract);
   };
 
   render() {
+
+    const optionRoom = this.props.roomArray.map((room) => {
+      return ( 
+        <option key={room.id} value={room.id}>
+          {room.roomInQuestionId}
+          </option>     
+      );
+    });
+
+    const optionTenant = this.props.tenantArray.map((tenant) => {
+      return ( 
+        <option key={tenant.id} value={tenant.id}>
+          {tenant.tenantInQuestionId}
+          </option>     
+      );
+    });
+
+
     return (
       <div className="col-md-6">
         <div className="row">
@@ -73,7 +91,7 @@ class ContractCreate extends Component {
             <input
               id="endDate"
               type="date"
-              required              
+              // required              
               className="form-control col-10"
               placeholder="Enter Contract End Date"
             />
@@ -83,25 +101,18 @@ class ContractCreate extends Component {
             <label htmlFor="roomInQuestion" className="col-2 mt-2">
             Room Number:
             </label>
-            <input
-              id="roomInQuestion"
-              type="number"
-              required              
-              className="form-control col-10"
-              placeholder="Enter Room Number"
-            />
+            <select id="roomInQuestion" required className="form-control col-10">
+              {optionRoom}
+            </select>
           </div>
 
           <div className="row mb-2">
             <label htmlFor="tenantInQuestion" className="col-2 mt-2">
             Tenant Name:
             </label>
-            <input
-              id="tenantInQuestion" 
-              type="text"             
-              className="form-control col-10"
-              placeholder="Enter Tenant Name"
-            />
+            <select id="tenantInQuestion" required className="form-control col-10">
+              {optionTenant}
+            </select>
           </div>
             
           
