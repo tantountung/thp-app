@@ -1,6 +1,22 @@
 import React from "react";
 
 const ContractDetails = (props) => {
+
+//   let roomNumber = 'No Language';
+//   if(props.contract.roomInQuestion != null){
+          
+    
+//     roomNumber = props.contract.roomInQuestion.map((roomInQuestion) =>
+      
+//       {
+// return (
+//     <p key = {roomInQuestion.room.id}>{roomInQuestion.room.roomNumber}</p>
+//  )
+//       });
+ 
+//     }
+
+
   return (
     <div className="col-md-6">
       <ul className="list-group">       
@@ -11,7 +27,7 @@ const ContractDetails = (props) => {
         </li>
 
         <li className="list-group-item">
-          <b>Payment Date:</b>
+                    <b>Payment Date:</b>
           <p>{props.contract.paymentDate}</p>
         </li>       
 
@@ -27,12 +43,15 @@ const ContractDetails = (props) => {
 
         <li className="list-group-item">
           <b>Room In Question:</b>
-          <p>{props.contract.roomInQuestionId}</p>
+          <p>{props.contract.roomInQuestionId == null?
+          'No Room': props.contract.roomInQuestionId.roomNumber}</p>
+        {/* <p>{roomNumber}</p> */}
         </li>
        
         <li className="list-group-item">
           <b>Tenant In Question:</b>
-          <p>{props.contract.tenantInQuestionId}</p>
+          <p>{props.contract.tenantInQuestion == null?
+          'No Tenant': props.contract.tenantInQuestion.tenantName}</p>
         </li>
 
                 
