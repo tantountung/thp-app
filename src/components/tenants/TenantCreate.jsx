@@ -6,7 +6,7 @@ class TenantCreate extends Component {
     event.preventDefault();
 
     const tenant = {
-      id: 0,     
+      // id: 0,     
       tenantName: event.target["tenantName"].value,   
       tenantPhone: event.target["tenantPhone"].value,      
       //issue cant add since before phone was put as Number, 
