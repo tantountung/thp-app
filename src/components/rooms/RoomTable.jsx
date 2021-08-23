@@ -3,13 +3,13 @@ import React from "react";
 const RoomTable = (props) => {
   const rows = props.rooms.map((room) => {
     return (
-      <tr key={room.id}>
+      <tr key={room.roomInQuestionId}>
         <td>{room.roomNumber}</td>
         <td>{room.roomType}</td>      
         <td>
           <button 
           onClick={() => {
-            props.showRoom(room.id);
+            props.showRoom(room.roomInQuestionId);
             }}
               className="btn btn-info">
           Details

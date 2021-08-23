@@ -21,12 +21,12 @@ class TenantApp extends Component {
     });
   }
 
-  findTenant = async (id) => {
-       return await getTenantById(id);
+  findTenant = async (tenantInQuestionId) => {
+       return await getTenantById(tenantInQuestionId);
   };
 
-  showTenant = async (id) => {
-    const tenant = await this.findTenant(id);
+  showTenant = async (tenantInQuestionId) => {
+    const tenant = await this.findTenant(tenantInQuestionId);
     if (tenant != null) {
       this.setState({
         detailsTenant: tenant,
@@ -40,13 +40,13 @@ class TenantApp extends Component {
     });
   };
 
-  deleteTenantHandler = (id) => {
-    const tenant = this.findTenant(id);
+  deleteTenantHandler = (tenantInQuestionId) => {
+    const tenant = this.findTenant(tenantInQuestionId);
     if (tenant != null) {
-      if (deleteTenant(id)) {
+      if (deleteTenant(tenantInQuestionId)) {
         const tenants = this.state.tenantList;
         tenants.forEach((element) => {
-          if (element.id === id) {
+          if (element.tenantInQuestionId === tenantInQuestionId) {
             tenants.pop(element);
           }
         });

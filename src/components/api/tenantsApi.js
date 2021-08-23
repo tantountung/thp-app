@@ -5,9 +5,9 @@ export default function getTenants() {
         .then(data => data.data);
 }
 
-export async function getTenantById(id) {
+export async function getTenantById(tenantInQuestionId) {
     try {
-        let response = await axios.get('https://localhost:44320/api/tenantsReact/' + id);
+        let response = await axios.get('https://localhost:44320/api/tenantsReact/' + tenantInQuestionId);
                 let json = await response.data;
                 return json;
     }
@@ -32,10 +32,10 @@ export async function createTenant(tenant) {
     }
 }
 
-export async function deleteTenant(id) {
+export async function deleteTenant(tenantInQuestionId) {
 
     try {
-        let response = await axios.delete('https://localhost:44320/api/tenantsReact/' + id);
+        let response = await axios.delete('https://localhost:44320/api/tenantsReact/' + tenantInQuestionId);
                 return true;
     }
     catch (e) {

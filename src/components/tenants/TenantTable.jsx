@@ -3,14 +3,14 @@ import React from "react";
 const TenantTable = (props) => {
   const rows = props.tenants.map((tenant) => {
     return (
-      <tr key={tenant.id}>
+      <tr key={tenant.tenantInQuestionId}>
         <td>{tenant.tenantName}</td>
         <td>{tenant.tenantPhone}</td>   
         <td>{tenant.tenantDocument}</td>      
         <td
           className="btn btn-info"
           onClick={() => {
-            props.showTenant(tenant.id);
+            props.showTenant(tenant.tenantInQuestionId);
           }}>
           Details
         </td>

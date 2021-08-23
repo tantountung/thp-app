@@ -5,9 +5,9 @@ export default function getRooms() {
         .then(data => data.data);
 }
 
-export async function getRoomById(id) {
+export async function getRoomById(roomInQuestionId) {
     try {
-        let response = await axios.get('https://localhost:44320/api/roomsReact/' + id);
+        let response = await axios.get('https://localhost:44320/api/roomsReact/' + roomInQuestionId);
                 let json = await response.data;
                 return json;
     }
@@ -31,10 +31,10 @@ export async function createRoom(room) {
     }
 }
 
-export async function deleteRoom(id) {
+export async function deleteRoom(roomInQuestionId) {
 
     try {
-        let response = await axios.delete('https://localhost:44320/api/roomsReact/' + id);
+        let response = await axios.delete('https://localhost:44320/api/roomsReact/' + roomInQuestionId);
                 return true;
     }
     catch (e) {

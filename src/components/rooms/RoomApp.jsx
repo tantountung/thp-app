@@ -21,12 +21,12 @@ class RoomApp extends Component {
     });
   }
 
-  findRoom = async (id) => {
-       return await getRoomById(id);
+  findRoom = async (roomInQuestionId) => {
+       return await getRoomById(roomInQuestionId);
   };
 
-  showRoom = async (id) => {
-    const room = await this.findRoom(id);
+  showRoom = async (roomInQuestionId) => {
+    const room = await this.findRoom(roomInQuestionId);
     if (room != null) {
       this.setState({
         detailsRoom: room,
@@ -40,13 +40,13 @@ class RoomApp extends Component {
     });
   };
 
-  deleteRoomHandler = (id) => {
-    const room = this.findRoom(id);
+  deleteRoomHandler = (roomInQuestionId) => {
+    const room = this.findRoom(roomInQuestionId);
     if (room != null) {
-      if (deleteRoom(id)) {
+      if (deleteRoom(roomInQuestionId)) {
         const rooms = this.state.roomList;
         rooms.forEach((element) => {
-          if (element.id === id) {
+          if (element.roomInQuestionId === roomInQuestionId) {
             rooms.pop(element);
           }
         });
@@ -95,10 +95,12 @@ class RoomApp extends Component {
           deleteRoom={this.deleteRoomHandler}
         />
       ) : this.state.createRoom ? (
-        <RoomCreate addRoom={this.addRoom} closeCreate={this.closeCreate} />
+        <RoomCreate addRoom={this.addRoom} 
+        closeCreate={this.closeCreate} />
       ) : (
         <div className="col-md-6">
-          <button onClick={this.showCreateRoom} className="btn btn-success">
+          <button onClick={this.showCreateRoom} 
+          className="btn btn-success">
             Add Room
           </button>
           <p>Click on Details button to see more information here.</p>
@@ -112,7 +114,8 @@ class RoomApp extends Component {
           <h3>Room SPA</h3>
           <hr />
           <div className="row">
-            <RoomTable rooms={this.state.roomList} showRoom={this.showRoom} />
+            <RoomTable rooms={this.state.roomList} 
+            showRoom={this.showRoom} />
             {sideElement}
           </div>
         </div>

@@ -27,7 +27,7 @@ const TenantDetails = (props) => {
           </button>
           <button
             className="btn btn-danger"
-            onClick={() => props.deleteTenant(props.tenant.id)}>
+            onClick={() => props.deleteTenant(props.tenant.tenantInQuestionId)}>
             Delete
           </button>
         </li>

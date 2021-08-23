@@ -1,5 +1,6 @@
 import React from "react";
 
+
 const ContractDetails = (props) => {
 
 //   let roomNumber = 'No Language';
@@ -43,10 +44,10 @@ const ContractDetails = (props) => {
 
         <li className="list-group-item">
           <b>Room In Question:</b>
-          <p>{props.contract.roomInQuestionId == null?
-          'No Room': props.contract.roomInQuestionId.roomNumber}</p>
-        {/* <p>{roomNumber}</p> */}
-        </li>
+          <p>{props.contract.roomInQuestion == null?
+          'No Room': props.contract.roomInQuestion.roomNumber}</p> 
+        {/* <p>{roomNumber}</p> */} 
+            </li>
        
         <li className="list-group-item">
           <b>Tenant In Question:</b>

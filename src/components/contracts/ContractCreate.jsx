@@ -6,13 +6,13 @@ class ContractCreate extends Component {
     event.preventDefault();
 
     const contract = {
-      id: 0,           
-      roomPrice: Number(event.target["roomPrice"].value),
-      paymentDate: event.target["paymentDate"].value,
-      startDate: event.target["startDate"].value,
-      endDate: event.target["endDate"].value,
-      roomInQuestionId: event.target["roomInQuestion"].value,
-      tenantInQuestionId: event.target["tenantInQuestion"].value,      
+      // id: 0,           
+      RoomPrice: Number(event.target["roomPrice"].value),
+      PaymentDate: event.target["paymentDate"].value,
+      StartDate: event.target["startDate"].value,
+      EndDate: event.target["endDate"].value,
+      RoomInQuestionId: Number(event.target["roomInQuestionId"].value),
+      TenantInQuestionId: Number(event.target["tenantInQuestionId"].value),      
     };
 
     this.props.addContract(contract);
@@ -22,16 +22,16 @@ class ContractCreate extends Component {
 
     const optionRoom = this.props.roomArray.map((room) => {
       return ( 
-        <option key={room.id} value={room.id}>
-          {room.roomInQuestionId}
+        <option key={room.roomInQuestionId} value={room.roomInQuestionId}>
+          {room.roomNumber}
           </option>     
       );
     });
 
     const optionTenant = this.props.tenantArray.map((tenant) => {
       return ( 
-        <option key={tenant.id} value={tenant.id}>
-          {tenant.tenantInQuestionId}
+        <option key={tenant.tenantInQuestionId} value={tenant.tenantInQuestionId}>
+          {tenant.tenantName}
           </option>     
       );
     });
@@ -98,19 +98,24 @@ class ContractCreate extends Component {
           </div>
 
           <div className="row mb-2">
-            <label htmlFor="roomInQuestion" className="col-2 mt-2">
+            <label htmlFor="roomInQuestionId" 
+            className="col-2 mt-2">
             Room Number:
             </label>
-            <select id="roomInQuestion" required className="form-control col-10">
+            <select id="roomInQuestionId"
+            required 
+            className="form-control col-10">
               {optionRoom}
             </select>
           </div>
 
           <div className="row mb-2">
-            <label htmlFor="tenantInQuestion" className="col-2 mt-2">
+            <label htmlFor="tenantInQuestionId" 
+            className="col-2 mt-2">
             Tenant Name:
             </label>
-            <select id="tenantInQuestion" required className="form-control col-10">
+            <select id="tenantInQuestionId" 
+            required className="form-control col-10">
               {optionTenant}
             </select>
           </div>

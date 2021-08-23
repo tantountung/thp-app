@@ -108,14 +108,16 @@ class ContractApp extends Component {
           deleteContract={this.deleteContractHandler}
         />
       ) : this.state.createContract ? (
-        <ContractCreate addContract={this.addContract} 
+        <ContractCreate 
+        addContract={this.addContract} 
         closeCreate={this.closeCreate}
         roomArray= {this.state.roomList}
         tenantArray= {this.state.tenantList}
          />
       ) : (
         <div className="col-md-6">
-          <button onClick={this.showCreateContract} className="btn btn-success">
+          <button onClick={this.showCreateContract} 
+          className="btn btn-success">
             Add Contract
           </button>
           <p>Click on Details button to see more information here.</p>

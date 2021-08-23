@@ -6,7 +6,7 @@ class RoomCreate extends Component {
     event.preventDefault();
 
     const room = {
-      id: 0,      
+      // id: 0,      
       roomNumber: Number(event.target["roomNumber"].value),      
       roomType: event.target["roomType"].value,
     };

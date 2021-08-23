@@ -17,12 +17,13 @@ const RoomDetails = (props) => {
         
         <li className="list-group-item">
           <b>Actions:</b>
-          <button className="btn btn-secondary" onClick={props.closeDetails}>
+          <button className="btn btn-secondary" 
+          onClick={props.closeDetails}>
             Close
           </button>
           <button
             className="btn btn-danger"
-            onClick={() => props.deleteRoom(props.room.id)}>
+            onClick={() => props.deleteRoom(props.room.roomInQuestionId)}>
             Delete
           </button>
         </li>
